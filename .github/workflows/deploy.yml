@@ -39,11 +39,11 @@ jobs:
             fi
 
             # Eliminar despliegue anterior y volver a clonar
-            rm -rf despliegue-microservicios
-            git clone https://github.com/Nachovels/despliegue-microservicios.git
+            sudo rm -rf despliegue-microservicios
+            sudo git clone https://github.com/Nachovels/despliegue-microservicios.git
             cd despliegue-microservicios
 
             # Desplegar servicios
-            docker-compose down || true
-            docker-compose up -d --build
+            sudo docker-compose down || true
+            sudo docker-compose up -d --build
             echo "Despliegue completado."
