@@ -6,11 +6,17 @@ services:
       context: https://github.com/Nachovels/microGestorCursos.git
     container_name: gestor-cursos
     ports:
-      - "8080:8080"  # puerto interno 8080 → externo 8080
-
+      - "8080:8080"  
   reportes:
     build:
       context: https://github.com/Nachovels/microReportes.git
     container_name: micro-reportes
     ports:
-      - "8081:8081"  # puerto interno 8081 → externo 8081
+      - "8081:8081"  
+
+  micro-usuarios:
+    build:
+      context: https://github.com/Ignaciofuen/microdeusuarios.git
+    container_name: micro-usuarios
+    ports:
+      - "8082:8082"  
