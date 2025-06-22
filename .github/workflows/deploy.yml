@@ -6,12 +6,61 @@ on:
       - main
 
 jobs:
-  deploy:
+  test-and-deploy:
     runs-on: ubuntu-latest
+
     steps:
       - name: Clonar este repositorio de despliegue
         uses: actions/checkout@v3
 
+      ############################
+      # Tests: microGestorCursos
+      ############################
+      - name: Clonar microGestorCursos
+        uses: actions/checkout@v3
+        with:
+          repository: Nachovels/microGestorCursos
+          path: microGestorCursos
+
+      - name: Ejecutar tests - microGestorCursos
+        working-directory: microGestorCursos
+        run: |
+          chmod +x mvnw || true
+          ./mvnw test
+
+      ############################
+      # Tests: microReportes
+      ############################
+      - name: Clonar microReportes
+        uses: actions/checkout@v3
+        with:
+          repository: Nachovels/microReportes
+          path: microReportes
+
+      - name: Ejecutar tests - microReportes
+        working-directory: microReportes
+        run: |
+          chmod +x mvnw || true
+          ./mvnw test
+
+      ############################
+      # Tests: microdeusuarios
+      ############################
+      - name: Clonar microdeusuarios
+        uses: actions/checkout@v3
+        with:
+          repository: Ignaciofuen/microdeusuarios
+          path: microdeusuarios
+
+      - name: Ejecutar tests - microdeusuarios
+        working-directory: microdeusuarios
+        run: |
+          chmod +x mvnw || true
+          ./mvnw test
+
+      ############################
+      # Despliegue en EC2
+      ############################
       - name: Conectarse e instalar Docker + Compose + desplegar microservicios
         uses: appleboy/ssh-action@v1
         with:
