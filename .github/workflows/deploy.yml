@@ -92,7 +92,12 @@ jobs:
             sudo git clone https://github.com/Nachovels/despliegue-microservicios.git
             cd despliegue-microservicios
 
-            # Desplegar servicios
+            # Limpiar contenedores e imágenes viejas (opcional pero recomendado)
             sudo docker-compose down || true
+            sudo docker system prune -f
+
+            # Desplegar con nginx incluido
             sudo docker-compose up -d --build
-            echo "Despliegue completado."
+
+            echo "Despliegue completado con éxito."
+
